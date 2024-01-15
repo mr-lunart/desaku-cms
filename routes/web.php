@@ -46,7 +46,7 @@ Route::match(['get', 'post'], '/login', function (Request $request) {
     }
 })->name('login');
 
-Route::post('/test',[Dashboard::class,'shodata'])->name('test');
+Route::post('/test',[Dashboard::class,'showdata'])->name('test');
 
 Route::controller(PusatData::class)->group(function (){
     Route::post('/admin/pusatdata/konversi','konversiMD')->name('konversiMD');
