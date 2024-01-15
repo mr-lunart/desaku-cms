@@ -1,7 +1,7 @@
 
-# sirandu-simple-cms
+# Sirandu Super CMS
 
-CMS sederhana yang di kembangkan dari framework laravel untuk website pribadi atau komunitas lokal
+CMS yang di kembangkan dari framework laravel untuk website pribadi atau komunitas lokal
 
 - Simple Image Proccessing
 - Markdown Editing for Page
