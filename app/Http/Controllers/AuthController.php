@@ -13,11 +13,11 @@ class AuthController extends Controller
 
     public static function login(Request $request){
     $request->validate([
-    'email' => 'required|string|email',
+    'username' => 'required|string',
     'password' => 'required|string'
     ]);
 
-    $credentials = request(['email','password']);
+    $credentials = request(['username','password']);
     if(!Auth::attempt($credentials))
     {
         return 'Unauthorized';
