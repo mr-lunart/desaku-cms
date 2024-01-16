@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 
 class AuthController extends Controller
 {
@@ -11,28 +12,34 @@ class AuthController extends Controller
         $request->all;
     }
 
-    public static function login(Request $request){
-    $request->validate([
-    'username' => 'required|string',
-    'password' => 'required|string'
-    ]);
-
-    $credentials = request(['username','password']);
-    if(!Auth::attempt($credentials))
+    public static function login(Request $request): RedirectResponse
     {
-        return 'Unauthorized';
-    // return response()->json([
-    //     'message' => 'Unauthorized'
-    // ],401);
+        $request->validate([
+        'username' => 'required|string',
+        'password' => 'required|string'
+        ]);
+
+        $credentials = request(['username','password']);
+        if(!Auth::attempt($credentials))
+        {
+            return back()->withErrors([
+                'username' => 'The provided credentials do not match our records.',
+            ])->onlyInput('username');
+        }
+
+        $request->session()->regenerate();
+
+        return redirect()->intended('dashboard');
     }
 
-    $user = $request->user();
-    $tokenResult = $user->createToken('Personal Access Token');
-    $token = $tokenResult->plainTextToken;
+    public static function logout(Request $request): RedirectResponse
+    {
+        Auth::guard('web')->logout();
 
-    return response()->json([
-    'accessToken' =>$token,
-    'token_type' => 'Bearer',
-    ]);
-}
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('admin');
+    }
 }

@@ -28,11 +28,11 @@ Route::get('/admin', function () {
     return view('login');
 })->name('admin');
 
-Route::match(['GET', 'POST'], '/login', function (Request $request, AuthController $authController) {
+Route::match(['GET', 'POST'], '/login', function (Request $request) {
 
     switch ($request->method()) {
         case 'POST':
-            return app()->call([$authController::class,'login']);
+            return app()->call([AuthController::class,'login']);
 
         case 'GET':
             return redirect()->route('admin');
@@ -42,30 +42,31 @@ Route::match(['GET', 'POST'], '/login', function (Request $request, AuthControll
     }
 })->name('login');
 
-// Route::get('/', function () {
-//     return view('welcome');
-// })->name('root');
+Route::get('/', function () {
+    return view('welcome');
+})->name('root');
 
 
 
 // Route::post('/test',[Dashboard::class,'showdata'])->name('test');
 
-// Route::controller(PusatData::class)->group(function (){
-//     Route::post('/admin/pusatdata/konversi','konversiMD')->name('konversiMD');
-//     Route::post('/admin/pusatdata/database/upload/profil','addRT')->name('profilUpload');
-//     Route::post('/admin/pusatdata/database/upload/visi','visiUpload')->name('visiUpload');
-//     Route::post('/admin/pusatdata/database/upload/galeri','galeriUpload')->name('galeriUpload');
-// });
+Route::controller(PusatData::class)->group(function (){
+    Route::post('/admin/pusatdata/konversi','konversiMD')->name('konversiMD');
+    Route::post('/admin/pusatdata/database/upload/profil','addRT')->name('profilUpload');
+    Route::post('/admin/pusatdata/database/upload/visi','visiUpload')->name('visiUpload');
+    Route::post('/admin/pusatdata/database/upload/galeri','galeriUpload')->name('galeriUpload');
+});
 
-// Route::middleware(['verify'])->group(function () {
-    
-//     Route::get('/admin/artikel/baru',[Artikel::class,'artikelBaru'])->name('artikelBaru');
-//     Route::get('/admin/pusatdata', [DataRT::class,'dataRT'])->name('pusatdata');
-//     Route::get('/admin/pusatdata/databaru', [DataRT::class,'databaru'])->name('databaru');
-//     Route::get('/admin/pusatdata/visi', [DataRT::class,'visiBaru'])->name('visibaru');
-//     Route::get('/admin/artikel', [Artikel::class,'artikelBoard'])->name('artikelBoard');
-//     Route::get('/admin/galeri', [Galeri::class,'galeriPage'])->name('galeri');
-//     Route::get('/admin/galeri/upload', [Galeri::class,'uploadGaleri'])->name('uploadGaleri');
-//     Route::get('/admin/pusatdata/database/rt/deleted', [PusatData::class,'deletedRT'])->name('deletedRT');
 
-// });
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/dashboard',[Dashboard::class,'dashboard'])->name('dashboard');
+    Route::get('/admin/artikel/baru',[Artikel::class,'artikelBaru'])->name('artikelBaru');
+    Route::get('/admin/pusatdata', [DataRT::class,'dataRT'])->name('pusatdata');
+    Route::get('/admin/pusatdata/databaru', [DataRT::class,'databaru'])->name('databaru');
+    Route::get('/admin/pusatdata/visi', [DataRT::class,'visiBaru'])->name('visibaru');
+    Route::get('/admin/artikel', [Artikel::class,'artikelBoard'])->name('artikelBoard');
+    Route::get('/admin/galeri', [Galeri::class,'galeriPage'])->name('galeri');
+    Route::get('/admin/galeri/upload', [Galeri::class,'uploadGaleri'])->name('uploadGaleri');
+    Route::get('/admin/pusatdata/database/rt/deleted', [PusatData::class,'deletedRT'])->name('deletedRT');
+    Route::get('/admin/logout', [AuthController::class,'logout'])->name('logout');
+});
