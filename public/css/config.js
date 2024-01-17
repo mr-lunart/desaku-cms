@@ -5,7 +5,7 @@ module.exports = {
     "./../../public/css/flowbite.js",
     "./../../public/css/style.js",
     "./../../resources/**/*.{html,js,php}",
-  ],
+            ],
   theme: {
     extend: {},
   },

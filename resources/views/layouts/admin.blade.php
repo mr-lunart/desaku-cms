@@ -7,8 +7,6 @@
     <meta name="author" content="">
     <title>Dashboard</title>
     <link rel="stylesheet" href="<?= asset('css/tailwind.css') ?>">
-    <link rel="stylesheet" href="<?= asset('css/flowbite.css') ?>">
-
     @yield('tiny-mde')
 </head>
 
@@ -27,7 +25,7 @@
     </div>
 
     @yield('footer')
-
+    <script></script>
 </body>
 
 </html>
