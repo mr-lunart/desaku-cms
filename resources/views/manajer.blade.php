@@ -12,19 +12,20 @@
 </div>
 <br>
 <div class="container rounded-md border px-4 py-4 font-sans">
-    <table class="table-auto w-full">
+    <table class="table-fixed w-full">
         <thead class="">
             <tr>
             <th class="border-b pt-0 pb-3 text-left">Nama Admin</th>
-            <th class="border-b pt-0 pb-3 text-left">Tanggal Dibuat</th>
+            <th class="border-b pt-0 pb-3 text-left">Terakhir Aktif</th>
             <th class="border-b pt-0 pb-3 text-left">Hak Akses</th>
             <th class="border-b pt-0 pb-3 text-left">Opsi</th>
+            <th class="border-b pt-0 pb-3 text-left">Log</th>
             </tr>
         </thead>
         <tbody class="text-sm">
             <tr class="border">
-                <td class="p-3">The Sliding Mr. Bones </td>
-                <td></td>
+                <td class="p-3 text-wrap">The Sliding Mr. Bones </td>
+                <td class="p-3 text-wrap break-all">Textinisangatpanjangdantidakterputussebagaitestapabilaadamasukannyanganehanhe</td>
                 <td class="p-3">
                     <button class="flex justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500">Lihat Hak</button>
                 </td>
