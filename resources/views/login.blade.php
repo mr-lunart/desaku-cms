@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <!-- <link rel="stylesheet" href="<?=asset('css/tailwind.css')?>"> -->
+    <link rel="stylesheet" href="<?=asset('css/tailwind.css')?>">
 </head>
 <body class="font-sans">
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -14,7 +14,7 @@
   </div>
 
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form id="login" class="space-y-6" action="<?=route('login')?>" method="POST">
+    <form id="login" class="space-y-6" action="{{route('login')}}" method="POST">
     @csrf
       <div>
         <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
@@ -36,7 +36,7 @@
       </div>
 
       <div>
-        <button id="login-submit" type="button" class="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign In</button>
+        <button id="login-submit" class="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign In</button>
       </div>
     </form>
   </div>
@@ -44,37 +44,42 @@
 <script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
 <script src="{{asset('js/jquery.validate.js')}}"></script>
 <script src="{{asset('js/additional-methods.js')}}"></script>
-<script>
 
+<script>
   $(document).ready(function() {
     $("#login-submit").on("click", function(e) {
+
       $("#login").validate({
         rules: {
-            username: {
-                required: true,
-                // minlength: 8
+          username: {
+            required: true,
+            minlength: 8,
+            alphanumeric:true
             },
-            password: {
-                required: true,
-                // minlength: 8
+          password: {
+            required: true,
+            minlength: 8,
+            alphanumeric:true
             },
         },
         messages: {
-        username: {
-            required: "Username harus diisi",
-            minlength: "Minimal 8 Karakter"
-        },
-        password: {
-            required: "Password harus disii",
-            minlength: "Minimal 8 Karakter"
-            
-        },
+          username: {
+            required: "<small style='color:red'>Username harus terisi</small>",
+            minlength: "<small style='color:red'>Minimal 8 Karakter</small>",
+            alphanumeric:"<small style='color:red'>Gunakan Angka, Huruf dan Underline</small>"
+            },
+          password: {
+            required: "<small style='color:red'>Password harus terisi</small>",
+            minlength: "<small style='color:red'>Minimal 8 Karakter</small>",
+            alphanumeric:"<small style='color:red'>Gunakan Angka, Huruf dan Underline</small>"
+            },
         },
         submitHandler: function(form) {
-        // Tindakan yang akan dijalankan setelah validasi berhasil
+          // Tindakan yang akan dijalankan setelah validasi berhasil
             form.submit();
         }
       });
+      
     });
   })
 </script>
