@@ -18,6 +18,6 @@
     <body class="antialiased">
         MASIH KOSONG, COBA LAGI :)
         <br>
-        <a class="link" href="admin">Klik Aku !</a>
+        <a class="link" href="admin/login">Klik Aku !</a>
     </body>
 </html>

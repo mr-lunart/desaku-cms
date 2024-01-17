@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Admin::factory()->create([
             'name' => 'user',
             'username' => 'dewanata',
-            'password'=>Hash::make('12345')
+            'password'=>Hash::make('12345678')
         ]);
     }
 }
