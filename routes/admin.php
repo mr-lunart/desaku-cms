@@ -26,7 +26,7 @@ Route::match(['GET', 'POST'], '/login', function (Request $request) {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard',[Dashboard::class,'dashboard'])->name('dashboard');
-    Route::get('/manajer',[ManajerController::class,'index'])->name('manajer');
+    Route::get('/manajer',[ManajerController::class,'manajerAdmin'])->name('manajer');
     Route::get('/artikel/baru',[Artikel::class,'artikelBaru'])->name('artikelBaru');
     Route::get('/pusatdata', [DataRT::class,'dataRT'])->name('pusatdata');
     Route::get('/pusatdata/databaru', [DataRT::class,'databaru'])->name('databaru');

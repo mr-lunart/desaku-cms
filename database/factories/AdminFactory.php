@@ -20,7 +20,6 @@ class AdminFactory extends Factory
         return [
             'name' => fake()->name(),
             'username' => fake()->unique()->userName(),
-            'email_verified_at' => now(),
             'password' => fake()->password(), // password
             'remember_token' => Str::random(10),
         ];

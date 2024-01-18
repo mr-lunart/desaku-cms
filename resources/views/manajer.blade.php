@@ -9,6 +9,7 @@
     <span class="">
         <h1 class="text-xl font-semibold"><bold>Manajer Admin</blod></h1>
     </span>
+    
 </div>
 <br>
 <div class="container rounded-md border px-4 py-4 font-sans">
@@ -23,9 +24,10 @@
             </tr>
         </thead>
         <tbody class="text-sm">
+            @foreach ($admins as $admin)
             <tr class="border">
-                <td class="p-3 text-wrap">The Sliding Mr. Bones </td>
-                <td class="p-3 text-wrap break-all">Textinisangatpanjangdantidakterputussebagaitestapabilaadamasukannyanganehanhe</td>
+                <td class="p-3 text-wrap">{{$admin->name}}</td>
+                <td class="p-3 text-wrap break-all">{{$admin->last_login_at}}</td>
                 <td class="p-3">
                     <button class="flex justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500">Lihat Hak</button>
                 </td>
@@ -34,17 +36,7 @@
                     <button class="rounded-md bg-blue-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500">Edit</button>
                 </td>
             </tr>
-            <tr class="border">
-                <td class="p-3">The Sliding Mr. Bones </td>
-                <td></td>
-                <td class="p-3">
-                    <button class="flex justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500">Lihat Hak</button>
-                </td>
-                <td class="p-3">
-                    <button class="rounded-md bg-red-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500">Hapus</button>
-                    <button class="rounded-md bg-blue-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500">Edit</button>
-                </td>
-            </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

@@ -8,12 +8,13 @@ use Illuminate\Http\Request;
 class ManajerController extends Controller
 {
     //
-    public static function index() {
-        return view('manajer');
-    }
-
     public static function getAdmins() {
         $admins = Admin::all();
         return $admins;
+    }
+
+    public function manajerAdmin() {
+        $admin = $this->getAdmins();
+        return view('manajer',['admins'=>$admin]);
     }
 }

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\CssSelector\Parser\Tokenizer\Tokenizer;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,9 +21,11 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         \App\Models\Admin::factory()->create([
-            'name' => 'user',
+            'name' => 'Dewanata Hammada',
             'username' => 'dewanata',
-            'password'=>Hash::make('12345678')
+            'password'=>Hash::make('12345678'),
+            'roles'=>'administrator'
+            
         ]);
     }
 }
