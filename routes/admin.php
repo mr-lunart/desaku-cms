@@ -30,7 +30,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/manajer',[ShowManajerPage::class,'manajerAdmin'])->name('manajer');
     Route::get('/manajer/insertadmin',[ShowManajerPage::class,'manajerInsertAdmin'])->name('manajerInsert');
-    Route::post('/manajer/createadmin',[ManajerController::class,'createAdmin'])->name('manajerInsert');
+    Route::post('/manajer/createadmin',[ManajerController::class,'createAdmin'])->name('manajerCreate');
     
     Route::get('/artikel/baru',[Artikel::class,'artikelBaru'])->name('artikelBaru');
     Route::get('/pusatdata', [DataRT::class,'dataRT'])->name('pusatdata');
