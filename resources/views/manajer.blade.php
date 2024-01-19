@@ -5,11 +5,13 @@
 @endsection
 
 @section('content')
-<div class="container border px-4 py-5 font-sans rounded-md">
-    <span class="">
+<div class="flex flex-auto flex-row justify-between container border px-4 py-5 font-sans rounded-md">
+    <div class="">
         <h1 class="text-xl font-semibold"><bold>Manajer Admin</blod></h1>
-    </span>
-    
+    </div>
+    <div class="">
+        <a href="{{}}"><button class="rounded-md bg-red-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500">Tambah Admin</button></a>
+    </div>
 </div>
 <br>
 <div class="container rounded-md border px-4 py-4 font-sans">
@@ -44,7 +46,4 @@
 
 @section('footer')
 <script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
-<script src="{{asset('js/jquery.validate.js')}}"></script>
-<script src="{{asset('js/additional-methods.js')}}"></script>
-
 @endsection

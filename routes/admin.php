@@ -2,13 +2,13 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ManajerController;
 
 use App\Http\Controllers\PusatData;
 use App\Http\Controllers\Artikel;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\DataRT;
 use App\Http\Controllers\Galeri;
+use App\Http\Controllers\Manajer\ShowManajerPage;
 
 Route::match(['GET', 'POST'], '/login', function (Request $request) {
 
@@ -26,7 +26,10 @@ Route::match(['GET', 'POST'], '/login', function (Request $request) {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard',[Dashboard::class,'dashboard'])->name('dashboard');
-    Route::get('/manajer',[ManajerController::class,'manajerAdmin'])->name('manajer');
+
+    Route::get('/manajer',[ShowManajerPage::class,'manajerAdmin'])->name('manajer');
+    Route::get('/manajer/insertadmin',[ShowManajerPage::class,'manajerAdmin'])->name('manajer');
+    
     Route::get('/artikel/baru',[Artikel::class,'artikelBaru'])->name('artikelBaru');
     Route::get('/pusatdata', [DataRT::class,'dataRT'])->name('pusatdata');
     Route::get('/pusatdata/databaru', [DataRT::class,'databaru'])->name('databaru');
