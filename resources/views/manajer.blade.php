@@ -10,7 +10,7 @@
         <h1 class="text-xl font-semibold"><bold>Manajer Admin</blod></h1>
     </div>
     <div class="">
-        <a href="{{}}"><button class="rounded-md bg-red-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500">Tambah Admin</button></a>
+        <a href="{{route('manajerInsert')}}"><button class="rounded-md bg-red-700 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500">Tambah Admin</button></a>
     </div>
 </div>
 <br>

@@ -8,6 +8,7 @@ use App\Http\Controllers\Artikel;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\DataRT;
 use App\Http\Controllers\Galeri;
+use App\Http\Controllers\Manajer\ManajerController;
 use App\Http\Controllers\Manajer\ShowManajerPage;
 
 Route::match(['GET', 'POST'], '/login', function (Request $request) {
@@ -28,7 +29,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard',[Dashboard::class,'dashboard'])->name('dashboard');
 
     Route::get('/manajer',[ShowManajerPage::class,'manajerAdmin'])->name('manajer');
-    Route::get('/manajer/insertadmin',[ShowManajerPage::class,'manajerAdmin'])->name('manajer');
+    Route::get('/manajer/insertadmin',[ShowManajerPage::class,'manajerInsertAdmin'])->name('manajerInsert');
+    Route::post('/manajer/createadmin',[ManajerController::class,'createAdmin'])->name('manajerInsert');
     
     Route::get('/artikel/baru',[Artikel::class,'artikelBaru'])->name('artikelBaru');
     Route::get('/pusatdata', [DataRT::class,'dataRT'])->name('pusatdata');
