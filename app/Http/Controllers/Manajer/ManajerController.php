@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use Exception;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class ManajerController extends Controller
 {
@@ -14,9 +15,14 @@ class ManajerController extends Controller
         return $admins;
     }
     public static function createAdmin(Request $request) {
+
+        // $validator = Validator::make([
+        //     'name'=>'required|unique:posts|max:255',
+        // ]);
         
         try {
             $query = Admin::factory()->create([
+                'no' => 0,
                 'name' => $request->input('name'),
                 'username' => $request->input('username'),
                 'password' => Hash::make($request->input('password')),
@@ -26,14 +32,8 @@ class ManajerController extends Controller
             return redirect()->route('manajer',['status'=>'failed','admin_no'=>$query->no,'username'=>$query->username]);
 
         } catch (Exception $e) {
-            $except= explode(':',$e->getMessage())[0];
-            if($except == 'SQLSTATE[23000]'){
-                return redirect()->route('manajer',['status'=>'failed']);
-            }
-            else{
-                return redirect()->route('manajer',['status'=>'uknown error']);
-            }
-            
+            $except= explode(':',$e->getMessage());
+            return redirect()->route('manajer',['status'=>'failed','message'=>$except[0].$except[1]]);
         }
         
         
