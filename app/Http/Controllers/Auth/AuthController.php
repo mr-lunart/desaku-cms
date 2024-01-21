@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
@@ -15,8 +16,8 @@ class AuthController extends Controller
     public static function login(Request $request): RedirectResponse
     {
         $request->validate([
-        'username' => 'required|string',
-        'password' => 'required|string'
+        'username' => 'required|string|alpha_dash',
+        'password' => 'required|string|alpha_dash'
         ]);
 
         $credentials = request(['username','password']);

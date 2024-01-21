@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Manajer;
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use Exception;

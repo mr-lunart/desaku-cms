@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\PusatData;
+use App\Http\Controllers\Starter\StarterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +15,7 @@ use App\Http\Controllers\PusatData;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('root');
-
+Route::get('/',[StarterController::class,'starter'])->name('root');
 
 // Route::post('/test',[Dashboard::class,'showdata'])->name('test');
 
