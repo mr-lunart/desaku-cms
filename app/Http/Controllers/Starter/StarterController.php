@@ -13,7 +13,6 @@ class StarterController extends Controller
 
     public function __construct()
     {
-        
 
         if( !(Storage::disk('local')->exists('.starter')) ){
 
@@ -29,7 +28,7 @@ class StarterController extends Controller
         
     }
 
-    public function starter()
+    public static function starter()
     {
         if(Storage::disk('local')->exists('.starter/.sirandu.json') ){
             $json = Storage::disk('local')->get('.starter/.sirandu.json');
@@ -39,11 +38,11 @@ class StarterController extends Controller
                 return view('starter');
             }
             elseif( $config->status == 'activated' ){
-                return redirect()->route('login');
+                return view('login');
             }
         }
         else {
-            Storage::disk('local')->put('.starter/.sirandu.json', $this->config);
+            Storage::disk('local')->put('.starter/.sirandu.json',self::$config);
         }
         
        

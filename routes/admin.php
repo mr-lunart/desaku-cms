@@ -10,20 +10,23 @@ use App\Http\Controllers\DataRT;
 use App\Http\Controllers\Galeri;
 use App\Http\Controllers\Manajer\ManajerController;
 use App\Http\Controllers\Manajer\ShowManajerPage;
+use App\Http\Controllers\Starter\StarterController;
 
-Route::match(['GET', 'POST'], '/login', function (Request $request) {
+Route::middleware(['guest'])->group(function () {
+    Route::match(['GET', 'POST'], '/login', function (Request $request) {
 
-    switch ($request->method()) {
-        case 'POST':
-            return app()->call([AuthController::class,'login']);
+        switch ($request->method()) {
+            case 'POST':
+                return app()->call([AuthController::class,'login']);
 
-        case 'GET':
-            return view('login');
+            case 'GET':
+                return app()->call([StarterController::class,'starter']);
 
-        default:
-            return redirect()->route('admin',['status'=>'failed']);
-    }
-})->name('login');
+            default:
+                return redirect()->route('admin',['status'=>'failed']);
+        }
+    })->name('login');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard',[Dashboard::class,'dashboard'])->name('dashboard');
