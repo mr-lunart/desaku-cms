@@ -13,19 +13,8 @@ use App\Http\Controllers\Manajer\ShowManajerPage;
 use App\Http\Controllers\Starter\StarterController;
 
 Route::middleware(['guest'])->group(function () {
-    Route::match(['GET', 'POST'], '/login', function (Request $request) {
-
-        switch ($request->method()) {
-            case 'POST':
-                return app()->call([AuthController::class,'login']);
-
-            case 'GET':
-                return app()->call([StarterController::class,'starter']);
-
-            default:
-                return redirect()->route('admin',['status'=>'failed']);
-        }
-    })->name('login');
+    return Route::get('/login',[StarterController::class,'starter'])->name('login');
+    return Route::post('/login',[AuthController::class,'login'])->name('login');
 });
 
 Route::middleware(['auth'])->group(function () {

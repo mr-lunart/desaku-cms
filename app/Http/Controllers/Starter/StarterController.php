@@ -4,28 +4,38 @@ namespace App\Http\Controllers\Starter;
 
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Casts\Json;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StarterController extends Controller
 {
-    protected $config;
+    public static $config;
 
     public function __construct()
     {
-
-        if( !(Storage::disk('local')->exists('.starter')) ){
-
+        if( !(Storage::disk('local')->exists('.starter')) AND !(Storage::disk('local')->exists('.starter/.sirandu.json')) ){
+            
             Storage::disk('local')->makeDirectory('.starter');
-            $this->config = json_encode([
-                'status'=>'disabled',
+            self::$config = json_encode([
+                'status'=>'activated',
                 'username'=>'',
                 'password'=>'',
                 'token'=>'',
                 'roles'=>'supervisor'
             ]);
         }
-        
+    }
+
+    public static function connectionCheck(){
+        try {
+            DB::connection()->getDatabaseName();
+            return "connected";
+            // Database exists and connection is successful
+          } catch (Exception $e) {
+            // Database connection failed, likely indicating non-existence
+            return $e;
+          }
     }
 
     public static function starter()
@@ -44,7 +54,5 @@ class StarterController extends Controller
         else {
             Storage::disk('local')->put('.starter/.sirandu.json',self::$config);
         }
-        
-       
     }
 }
