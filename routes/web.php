@@ -1,10 +1,9 @@
 <?php
+
+use App\Http\Controllers\Home\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\PusatData;
-use App\Http\Controllers\Starter\ShowStarterController;
-use App\Http\Controllers\Manajer\ShowManajerPage;
-use App\Http\Controllers\Starter\StarterController;
 
 
 /*
@@ -18,7 +17,7 @@ use App\Http\Controllers\Starter\StarterController;
 |
 */
 
-Route::get('/',[ShowStarterController::class,'index'])->name('root');
+Route::get('/',[HomeController::class,'showHome'])->name('home');
 
 // Route::post('/test',[Dashboard::class,'showdata'])->name('test');
 
