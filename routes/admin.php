@@ -14,7 +14,7 @@ use App\Http\Controllers\Starter\StarterController;
 
 Route::middleware(['guest'])->group(function () {
     return Route::get('/login',[StarterController::class,'starter'])->name('login');
-    return Route::post('/login',[AuthController::class,'login'])->name('login');
+    return Route::post('/login',[AuthController::class,'login']);
 });
 
 Route::middleware(['auth'])->group(function () {

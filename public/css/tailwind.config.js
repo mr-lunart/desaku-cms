@@ -4,9 +4,12 @@ module.exports = {
     "./../../public/css/flowbite.css",
     "./../../public/css/flowbite.js",
     "./../../public/css/style.js",
-    "./../../resources/**/*.{html,js,php}",
+    "./../../resources/**/*.{html,js,php,css}",
   ],
   theme: {
+    extend: {},
+  },
+  variants: {
     extend: {},
   },
   plugins: [
