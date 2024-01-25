@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Starter;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Exception;
+use Illuminate\Database\Migrations\Migration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 
 class StarterController extends Controller
@@ -83,8 +85,14 @@ class StarterController extends Controller
 
     public static function starterConfiguration(Request $request)
     {
+        $request->validate([
+            'username' => 'required|string|alpha_dash:ascii',
+            'password' => 'required|string|alpha_dash:ascii',
+            'email' => 'required|string|email'
+        ]);
 
-        
+        $migrate = Artisan::call('migrate:fresh --force');
+
         if (Storage::disk('local')->exists('.starter/.sirandu.json')) {
             $webJson = json_encode([
                 'status' => 'activated',
@@ -93,7 +101,8 @@ class StarterController extends Controller
                 'password' => $request->input('password'),
                 'email' => $request->input('email'),
                 'token' => '',
-                'roles' => 'owner'
+                'roles' => 'owner',
+                'table'=>''
             ]);
             Storage::disk('local')->put('.starter/.sirandu.json', $webJson);
         } else {

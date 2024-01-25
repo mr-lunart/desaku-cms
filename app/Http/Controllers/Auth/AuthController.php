@@ -16,8 +16,8 @@ class AuthController extends Controller
     public static function login(Request $request): RedirectResponse
     {
         $request->validate([
-        'username' => 'required|string|alpha_dash',
-        'password' => 'required|string|alpha_dash'
+        'username' => 'required|string|alpha_dash:ascii',
+        'password' => 'required|string|alpha_dash:ascii'
         ]);
 
         $credentials = request(['username','password']);
