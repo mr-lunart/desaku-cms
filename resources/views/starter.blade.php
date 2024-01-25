@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Installation Configuration</title>
   <link rel="stylesheet" href="<?= asset('css/tailwind.css') ?>">
+  <link rel="stylesheet" href="<?= asset('css/jquery-ui.css') ?>">
 </head>
 
 <body class="font-sans">
@@ -50,22 +51,25 @@
 
       </form>
 
-      @if ($errors->any())
-      <div class="alert alert-danger">
-        <ul>
-          @foreach ($errors->all() as $error)
-          <li>{{ $error }}</li>
-          @endforeach
-        </ul>
-      </div>
-      @endif
 
     </div>
   </div>
+
+  @if ($errors->any())
+  <div id="dialog-message" title="Form Invalid !">
+    @foreach ($errors->all() as $error)
+    <div>
+      <div class="ui-icon 	ui-icon-alert"></div>
+      <small>{{ $error }}</small>
+    </div>
+    @endforeach
+  </div>
+  @endif
+
   <script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
   <script type="text/javascript" src="{{asset('js/jquery-ui.js')}}"></script>
-  <script src="{{asset('js/jquery.validate.js')}}"></script>
-  <script src="{{asset('js/additional-methods.js')}}"></script>
+  <!-- <script src="{{asset('js/jquery.validate.js')}}"></script>
+  <script src="{{asset('js/additional-methods.js')}}"></script> -->
 
   <script>
     $(document).ready(function() {
@@ -115,6 +119,22 @@
       });
     })
   </script>
+
+  @if ($errors->any())
+  <script>
+    $(function() {
+      $("#dialog-message").dialog({
+        modal: true,
+        buttons: {
+          OK: function() {
+            $(this).dialog("close");
+          }
+        }
+      });
+    });
+  </script>
+  @endif
+
 </body>
 
 </html>
