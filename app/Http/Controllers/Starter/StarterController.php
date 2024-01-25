@@ -14,10 +14,7 @@ use Illuminate\Support\Facades\Hash;
 class StarterController extends Controller
 {
     public static $config = [
-        'status' => 'activated',
-        'username' => '',
-        'password' => '',
-        'roles' => 'owner'
+        'status' => 'disabled'
     ];
 
     public function __construct()
@@ -71,6 +68,8 @@ class StarterController extends Controller
                         return view('login');
                     }
                 } else {
+                    
+                    Storage::disk('local')->put('.starter/.sirandu.json', self::$config);
                     return view('starter');
                 }
             }
