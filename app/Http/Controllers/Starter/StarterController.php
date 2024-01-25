@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Starter;
 
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
-use Exception;
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+use App\Models\Admin;
+use Exception;
+use Illuminate\Support\Facades\Hash;
 
 class StarterController extends Controller
 {
@@ -91,22 +92,43 @@ class StarterController extends Controller
             'email' => 'required|string|email'
         ]);
 
-        $migrate = Artisan::call('migrate:fresh --force');
 
-        if (Storage::disk('local')->exists('.starter/.sirandu.json')) {
-            $webJson = json_encode([
-                'status' => 'activated',
-                'uid' => '',
-                'username' => $request->input('username'),
-                'password' => $request->input('password'),
-                'email' => $request->input('email'),
-                'token' => '',
-                'roles' => 'owner',
-                'table'=>''
+        try {
+            Artisan::call('migrate:fresh --force');
+        } catch (Exception $e) {
+            $except = explode(':', $e->getMessage());
+            return back()->withErrors([
+                'message' => $except[0] . $except[1],
+                'guide' => 'Please fill the form and submit again'
             ]);
-            Storage::disk('local')->put('.starter/.sirandu.json', $webJson);
-        } else {
-            Storage::disk('local')->put('.starter/.sirandu.json', self::$config);
         }
+
+        try {
+            Admin::factory()->create([
+                'no' => 0,
+                'name' => $request->input('name'),
+                'username' => $request->input('username'),
+                'password' => Hash::make($request->input('password')),
+                'roles' => 'administrator'
+            ]);
+        } catch (Exception $e) {
+            $except = explode(':', $e->getMessage());
+            return back()->withErrors([
+                'message' => $except[0] . $except[1],
+                'guide' => 'Please fill the form and submit again'
+            ]);
+        }
+
+        $webJson = json_encode([
+            'status' => 'activated',
+            'uid' => '',
+            'username' => $request->input('username'),
+            'password' => $request->input('password'),
+            'email' => $request->input('email'),
+            'token' => '',
+            'roles' => 'owner',
+        ]);
+        Storage::disk('local')->put('.starter/.sirandu.json', $webJson);
+        return redirect()->route('login');
     }
 }

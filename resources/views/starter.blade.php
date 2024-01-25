@@ -68,8 +68,8 @@
 
   <script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
   <script type="text/javascript" src="{{asset('js/jquery-ui.js')}}"></script>
-  <!-- <script src="{{asset('js/jquery.validate.js')}}"></script>
-  <script src="{{asset('js/additional-methods.js')}}"></script> -->
+  <script src="{{asset('js/jquery.validate.js')}}"></script>
+  <script src="{{asset('js/additional-methods.js')}}"></script>
 
   <script>
     $(document).ready(function() {
