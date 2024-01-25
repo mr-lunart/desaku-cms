@@ -13,8 +13,8 @@ use App\Http\Controllers\Manajer\ShowManajerPage;
 use App\Http\Controllers\Starter\StarterController;
 
 Route::middleware(['guest'])->group(function () {
-    return Route::get('/login',[StarterController::class,'starter'])->name('login');
-    return Route::post('/starter',[StarterController::class,'starterConfiguration'])->name('starter');
+    Route::get('/login',[StarterController::class,'starter'])->name('login');
+    Route::post('/starter',[StarterController::class,'starterConfiguration'])->name('starter');
 });
 
 Route::middleware(['auth'])->group(function () {

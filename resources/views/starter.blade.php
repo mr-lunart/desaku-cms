@@ -18,7 +18,7 @@
     </div>
     <hr class="sm:mx-auto sm:w-full sm:max-w-sm">
     <div class="p-3 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form id="login" class="space-y-6" action="" method="POST">
+      <form id="login" class="space-y-6" action="{{route('starter')}}" method="POST">
         @csrf
         <div>
           <div class="flex items-center justify-around gap-4">
@@ -40,7 +40,7 @@
             <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
           </div>
           <div class="mt-2">
-            <input id="email" name="email" type="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6" required title="Kolom Wajib Di Isi">
+            <input id="email" name="email" type="text" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6" required title="Kolom Wajib Di Isi">
           </div>
         </div>
 
@@ -49,9 +49,21 @@
         </div>
 
       </form>
+
+      @if ($errors->any())
+      <div class="alert alert-danger">
+        <ul>
+          @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+      @endif
+
     </div>
   </div>
   <script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
+  <script type="text/javascript" src="{{asset('js/jquery-ui.js')}}"></script>
   <script src="{{asset('js/jquery.validate.js')}}"></script>
   <script src="{{asset('js/additional-methods.js')}}"></script>
 
@@ -74,7 +86,7 @@
             email: {
               required: true,
               minlength: 8,
-              alphanumeric: true
+              email: true
             }
           },
           messages: {
@@ -91,7 +103,7 @@
             email: {
               required: "<small style='color:red'>Password harus terisi</small>",
               minlength: "<small style='color:red'>Minimal 8 Karakter</small>",
-              alphanumeric: "<small style='color:red'>Gunakan Angka, Huruf dan Underline</small>"
+              email: "<small style='color:red'>Gunakan Format Email</small>"
             },
           },
           submitHandler: function(form) {
