@@ -1,5 +1,5 @@
 
-# Sirandu Super CMS
+# Desaku Super CMS
 
 CMS yang di kembangkan dari framework laravel untuk website pribadi atau komunitas lokal
 
