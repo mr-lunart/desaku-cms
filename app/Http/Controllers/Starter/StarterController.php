@@ -110,6 +110,7 @@ class StarterController extends Controller
                 'password' => Hash::make($request->input('password')),
                 'roles' => 'administrator'
             ]);
+
         } catch (Exception $e) {
             $except = explode(':', $e->getMessage());
             return back()->withErrors([

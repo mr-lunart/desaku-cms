@@ -22,8 +22,8 @@ Route::get('/',[HomeController::class,'showHome'])->name('home');
 // Route::post('/test',[Dashboard::class,'showdata'])->name('test');
 
 Route::controller(PusatData::class)->group(function (){
-    // Route::post('/admin/pusatdata/konversi','konversiMD')->name('konversiMD');
-    // Route::post('/admin/pusatdata/database/upload/profil','addRT')->name('profilUpload');
-    // Route::post('/admin/pusatdata/database/upload/visi','visiUpload')->name('visiUpload');
-    // Route::post('/admin/pusatdata/database/upload/galeri','galeriUpload')->name('galeriUpload');
+    Route::post('/admin/pusatdata/konversi','konversiMD')->name('konversiMD');
+    Route::post('/admin/pusatdata/database/upload/profil','addRT')->name('profilUpload');
+    Route::post('/admin/pusatdata/database/upload/visi','visiUpload')->name('visiUpload');
+    Route::post('/admin/pusatdata/database/upload/galeri','galeriUpload')->name('galeriUpload');
 });

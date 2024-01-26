@@ -14,6 +14,7 @@ use App\Http\Controllers\Starter\StarterController;
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login',[StarterController::class,'starter'])->name('login');
+    Route::post('/login',[AuthController::class,'login'])->name('login');
     Route::post('/starter',[StarterController::class,'starterConfiguration'])->name('starter');
 });
 
