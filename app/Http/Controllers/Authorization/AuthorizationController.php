@@ -27,4 +27,36 @@ class AuthorizationController extends Controller
     {
         
     }
+    public static function showEditor()
+    {
+        
+    }
+    public static function showMasterdata()
+    {
+        
+    }
+    public static function showWebconfig()
+    {
+        
+    }
+    public static function showAppearance()
+    {
+        
+    }
+    public static function showWebreport()
+    {
+        
+    }
+    public static function showGallery()
+    {
+        
+    }
+    public static function showComment()
+    {
+        
+    }
+    public static function showAdminManajer()
+    {
+        
+    }
 }
