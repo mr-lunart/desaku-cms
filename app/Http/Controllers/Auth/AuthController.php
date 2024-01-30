@@ -15,7 +15,7 @@ class AuthController extends Controller
 
     public function __construct(Request $request)
     {
-        if($request->filled('username') && $request->filled('password')){
+        if ($request->filled('username') && $request->filled('password')) {
 
             $request->validate([
                 'username' => 'required|string|alpha_dash:ascii',
@@ -25,16 +25,15 @@ class AuthController extends Controller
             $this->username = $request->input('username');
             $this->password = $request->input('password');
         }
-        
     }
 
     public function login(Request $request)
     {
         $username = $this->username;
         $password = $this->password;
-        
+
         #make credential for auth
-        $credentials = ['username'=>$username, 'password'=>$password];
+        $credentials = ['username' => $username, 'password' => $password];
 
         if (!Auth::attempt($credentials)) {
             return back()->withErrors([
@@ -42,16 +41,14 @@ class AuthController extends Controller
             ])->onlyInput('username');
         }
 
-        if ($this->ownerAuth($request)){
-            $request->session()->put(['authorization'=>'owner']);
-        }
-        else {
-            $request->session()->put(['authorization'=>'admin']);
+        if ($this->ownerAuth($request)) {
+            $request->session()->put(['authorization' => 'owner']);
+        } else {
+            $request->session()->put(['authorization' => 'admin']);
         }
         $request->session()->regenerate();
 
         return redirect()->route('dashboard');
-
     }
 
     public function ownerAuth(Request $request): bool
@@ -80,13 +77,9 @@ class AuthController extends Controller
     public static function logout(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
-
         $request->session()->forget('authorization');
-
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
-
         return redirect()->route('login');
     }
 }

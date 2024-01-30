@@ -7,5 +7,13 @@ use Illuminate\Http\Request;
 
 class AuthorizationController extends Controller
 {
-    
+    public function __construct()
+    {
+        
+    }
+
+    public static function showDashboard()
+    {
+        
+    }
 }
