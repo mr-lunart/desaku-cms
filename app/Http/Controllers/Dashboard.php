@@ -10,6 +10,8 @@ class Dashboard extends Controller
 {
     public static function dashboard()
     {
+        $auth = session()->get('authorization');
+        var_dump($auth);
         return view('editor');
     }
     public static function showdata(Request $request)

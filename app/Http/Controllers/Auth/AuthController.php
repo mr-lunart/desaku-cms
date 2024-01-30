@@ -32,7 +32,8 @@ class AuthController extends Controller
     {
         $username = $this->username;
         $password = $this->password;
-        #make credential
+        
+        #make credential for auth
         $credentials = ['username'=>$username, 'password'=>$password];
 
         if (!Auth::attempt($credentials)) {
@@ -41,13 +42,19 @@ class AuthController extends Controller
             ])->onlyInput('username');
         }
 
-        // $request->session()->regenerate();
+        if ($this->ownerAuth($request)){
+            $request->session()->put(['authorization'=>'owner']);
+        }
+        else {
+            $request->session()->put(['authorization'=>'admin']);
+        }
+        $request->session()->regenerate();
 
-        // return redirect()->route('dashboard');
+        return redirect()->route('dashboard');
 
     }
 
-    public static function ownerAuth($request)
+    public function ownerAuth(Request $request): bool
     {
         if (Storage::disk('local')->exists('.starter/.sirandu.json')) {
             #get sirandu value and check if its value activated or not
@@ -59,13 +66,13 @@ class AuthController extends Controller
                     return redirect()->route('starter');
                 } elseif ($config->status == 'activated') {
 
-                    if (self::$username == $config->username && self::$password == $config->password) {
-                        $request->session()->put('owner', $request->input('username'));
+                    if ($this->username == $config->username && $this->password == $config->password) {
+                        return true;
                     }
                 }
             } else {
 
-                return redirect()->route('starter');
+                return false;
             }
         }
     }
@@ -73,6 +80,8 @@ class AuthController extends Controller
     public static function logout(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
+
+        $request->session()->forget('authorization');
 
         $request->session()->invalidate();
 
