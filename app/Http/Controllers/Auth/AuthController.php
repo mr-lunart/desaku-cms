@@ -10,42 +10,41 @@ use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
-    public static $username;
-    public static $password;
+    protected $username;
+    protected $password;
 
     public function __construct(Request $request)
     {
-        $request->validate([
-            'username' => 'required|string|alpha_dash:ascii',
-            'password' => 'required|string|alpha_dash:ascii'
-        ]);
+        if($request->filled('username') && $request->filled('password')){
+
+            $request->validate([
+                'username' => 'required|string|alpha_dash:ascii',
+                'password' => 'required|string|alpha_dash:ascii'
+            ]);
+
+            $this->username = $request->input('username');
+            $this->password = $request->input('password');
+        }
         
-        self::$username = $request->input('username');
-        self::$password = $request->input('password');
     }
 
-    public static function index(Request $request)
+    public function login(Request $request)
     {
-        
-    }
+        $username = $this->username;
+        $password = $this->password;
+        #make credential
+        $credentials = ['username'=>$username, 'password'=>$password];
 
-    public static function login(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'username' => 'required|string|alpha_dash:ascii',
-            'password' => 'required|string|alpha_dash:ascii'
-        ]);
-
-        $credentials = request(['username', 'password']);
         if (!Auth::attempt($credentials)) {
             return back()->withErrors([
                 'username' => 'The provided credentials do not match our records.',
             ])->onlyInput('username');
         }
 
-        $request->session()->regenerate();
+        // $request->session()->regenerate();
 
-        return redirect()->route('dashboard');
+        // return redirect()->route('dashboard');
+
     }
 
     public static function ownerAuth($request)

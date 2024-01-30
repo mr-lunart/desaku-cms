@@ -19,7 +19,7 @@
       <div>
         <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
         <div class="mt-2">
-          <input id="username" name="username" type="text" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6" required title="Kolom Wajib Di Isi">
+          <input id="username" name="username" type="text" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6" title="Kolom Wajib Di Isi">
         </div>
       </div>
 
@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="mt-2">
-          <input id="password" name="password" type="password" autocomplete="current-password" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6" required>
+          <input id="password" name="password" type="password" autocomplete="current-password" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6">
         </div>
       </div>
 
@@ -42,8 +42,8 @@
   </div>
 </div>
 <script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
-<script src="{{asset('js/jquery.validate.js')}}"></script>
-<script src="{{asset('js/additional-methods.js')}}"></script>
+<!-- <script src="{{asset('js/jquery.validate.js')}}"></script> -->
+<!-- <script src="{{asset('js/additional-methods.js')}}"></script> -->
 
 <script>
   $(document).ready(function() {
