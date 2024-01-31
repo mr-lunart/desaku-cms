@@ -18,8 +18,9 @@ class AuthorizationController extends Controller
     {
         $this->id_admin = $id_admin;
         $action = $permission;
+        //check if method exist
         if(method_exists($this,$action)){
-            //call the method and save the value
+            //call the method and pass the value
             $result = $this->{$action}();
             return ['method'=>$result];
         }
@@ -42,7 +43,7 @@ class AuthorizationController extends Controller
         $permission = DB::table('permission')
             ->select('showEditor', 'id_admin as '.$this->id_admin)
             ->get();
-        return $permission;
+        return $permission[0]->showEditor;
         
     }
 
@@ -51,7 +52,7 @@ class AuthorizationController extends Controller
         $permission = DB::table('permission')
             ->select('showMasterdata', 'id_admin as '.$this->id_admin)
             ->get();
-        return $permission;
+        return $permission[0]->showMasterdata;
     }
 
     public function showWebconfig()
@@ -59,7 +60,7 @@ class AuthorizationController extends Controller
         $permission = DB::table('permission')
             ->select('showWebconfig', 'id_admin as '.$this->id_admin)
             ->get();
-        return $permission;
+        return $permission[0]->showWebconfig;
     }
 
     public function showAppearance()
@@ -67,7 +68,7 @@ class AuthorizationController extends Controller
         $permission = DB::table('permission')
             ->select('showAppearance', 'id_admin as '.$this->id_admin)
             ->get();
-        return $permission;
+        return $permission[0]->showAppearance;
     }
 
     public function showWebreport()
@@ -75,7 +76,7 @@ class AuthorizationController extends Controller
         $permission = DB::table('permission')
             ->select('showWebreport', 'id_admin as '.$this->id_admin)
             ->get();
-        return $permission;
+        return $permission[0]->showWebreport;
     }
 
     public function showGallery()
@@ -83,7 +84,7 @@ class AuthorizationController extends Controller
         $permission = DB::table('permission')
             ->select('showGallery', 'id_admin as '.$this->id_admin)
             ->get();
-        return $permission;
+        return $permission[0]->showGallery;
     }
 
     public function showComment()
@@ -91,7 +92,7 @@ class AuthorizationController extends Controller
         $permission = DB::table('permission')
             ->select('showComment', 'id_admin as '.$this->id_admin)
             ->get();
-        return $permission;
+        return $permission[0]->showComment;
     }
 
     public function showAdminManajer()

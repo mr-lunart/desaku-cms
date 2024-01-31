@@ -14,10 +14,9 @@ class Dashboard extends Controller
     {
         $auth = session()->get('authorization');
         $id = session()->get('id_admin');
-        var_dump($auth);
         $test = new AuthorizationController();
         $permit = $test->getPermission('showDashboard',$id);
-        var_dump($permit);
+        print_r($permit);
         return view('editor');
     }
     public static function showdata(Request $request)
