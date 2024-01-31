@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Controllers\Authorization\AuthorizationController;
 use Illuminate\Support\Facades\Storage;
  
 use Illuminate\Http\Request;
@@ -11,7 +13,11 @@ class Dashboard extends Controller
     public static function dashboard()
     {
         $auth = session()->get('authorization');
+        $id = session()->get('id_admin');
         var_dump($auth);
+        $test = new AuthorizationController();
+        $permit = $test->getPermission('showDashboard',$id);
+        var_dump($permit);
         return view('editor');
     }
     public static function showdata(Request $request)

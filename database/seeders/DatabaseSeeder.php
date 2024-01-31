@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         // ]);
         \App\Models\Admin::factory()->create([
             'no' => 0,
+            'id_admin'=>str_pad(1, 12, '0', STR_PAD_LEFT),
             'name' => 'Dewanata Hammada',
             'username' => 'dewanata',
             'password'=>Hash::make('12345678'),

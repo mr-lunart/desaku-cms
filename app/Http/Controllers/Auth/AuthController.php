@@ -43,15 +43,17 @@ class AuthController extends Controller
 
         if ($this->ownerAuth($request)) {
             $request->session()->put(['authorization' => 'owner']);
+            $request->session()->put(['id_admin' => '000000000001']);
         } else {
             $request->session()->put(['authorization' => 'admin']);
+            $request->session()->put(['id_admin' => '000000000001']);
         }
         $request->session()->regenerate();
 
         return redirect()->route('dashboard');
     }
 
-    public function ownerAuth(Request $request): bool
+    public function ownerAuth(): bool
     {
         if (Storage::disk('local')->exists('.starter/.sirandu.json')) {
             #get sirandu value and check if its value activated or not

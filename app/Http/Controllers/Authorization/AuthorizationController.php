@@ -14,12 +14,14 @@ class AuthorizationController extends Controller
     {
     }
 
-    public function getPermmision($permission)
+    public function getPermission($permission, $id_admin): array
     {
+        $this->id_admin = $id_admin;
         $action = $permission;
-        if(function_exists($action)){
+        if(method_exists($this,$action)){
             //call the method and save the value
-            return $this->$action();
+            $result = $this->{$action}();
+            return ['method'=>$result];
         }
         else {
             return ['method'=>404];
@@ -28,53 +30,70 @@ class AuthorizationController extends Controller
 
     public function showDashboard()
     {
-        $users = DB::table('permission')
-            ->select('showDashboard', 'id_admin as '. $this->id_admin)
+        $permission = DB::table('permission')
+            ->select('showDashboard')
+            ->where( 'id_admin','=',$this->id_admin)
             ->get();
+        return $permission[0]->showDashboard;
     }
+
     public function showEditor()
     {
-        $users = DB::table('permission')
+        $permission = DB::table('permission')
             ->select('showEditor', 'id_admin as '.$this->id_admin)
             ->get();
+        return $permission;
         
     }
+
     public function showMasterdata()
     {
-        $users = DB::table('permission')
+        $permission = DB::table('permission')
             ->select('showMasterdata', 'id_admin as '.$this->id_admin)
             ->get();
+        return $permission;
     }
+
     public function showWebconfig()
     {
-        $users = DB::table('permission')
+        $permission = DB::table('permission')
             ->select('showWebconfig', 'id_admin as '.$this->id_admin)
             ->get();
+        return $permission;
     }
+
     public function showAppearance()
     {
-        $users = DB::table('permission')
+        $permission = DB::table('permission')
             ->select('showAppearance', 'id_admin as '.$this->id_admin)
             ->get();
+        return $permission;
     }
+
     public function showWebreport()
     {
-        $users = DB::table('permission')
+        $permission = DB::table('permission')
             ->select('showWebreport', 'id_admin as '.$this->id_admin)
             ->get();
+        return $permission;
     }
+
     public function showGallery()
     {
-        $users = DB::table('permission')
+        $permission = DB::table('permission')
             ->select('showGallery', 'id_admin as '.$this->id_admin)
             ->get();
+        return $permission;
     }
+
     public function showComment()
     {
-        $users = DB::table('permission')
+        $permission = DB::table('permission')
             ->select('showComment', 'id_admin as '.$this->id_admin)
             ->get();
+        return $permission;
     }
+
     public function showAdminManajer()
     {
         
