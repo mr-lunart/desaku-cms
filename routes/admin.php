@@ -20,7 +20,8 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard',[Dashboard::class,'dashboard'])->name('dashboard');
-    Route::get('/editor', [Editor::class,'workbench'])->name('editor');
+    Route::get('/workbench', [Editor::class,'workbench'])->name('workbench');
+    Route::get('/workbench/editor', [Editor::class,'editor'])->name('editor');
 
     Route::get('/manajer',[ShowManajerPage::class,'manajerAdmin'])->name('manajer');
     Route::get('/manajer/insertadmin',[ShowManajerPage::class,'manajerInsertAdmin'])->name('manajerInsert');

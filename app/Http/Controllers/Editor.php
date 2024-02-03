@@ -9,11 +9,11 @@ use App\Models\Artikel_Table;
 
 class Editor extends Controller
 {
-    public static function workbench()
+    public function workbench()
     {
         return view('workbench');
     }
-    public static function artikelBaru(Request $request)
+    public function editor()
     {
         return view('editor');
     }

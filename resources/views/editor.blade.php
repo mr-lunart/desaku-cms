@@ -9,15 +9,15 @@
 @endsection
 
 @section('content')
+<form action="#" method="POST" onsubmit="updateTextContainer()">
 
-
-<form action="<?= route('konversiMD') ?>" method="POST" onsubmit="updateTextContainer()">
     <button type="submit" class=" bg-blue-700 px-4 py-2 text-white rounded-none" onclick="$('form').attr('target', '_blank');">Preview</button>
     <button class=" bg-green-700 px-4 py-2 text-white rounded-none" onclick="$('form').attr('target', '');">Publish</button>
     @csrf
     <div class="txtcontainer">
         <textarea id="txt" name="markdown">Silahkan Menulis...</textarea>
     </div>
+    
 </form>
 <br>
 <div id="toolbar"></div>
@@ -27,9 +27,8 @@
 @endsection
 
 @section('footer')
-<script src="<?= asset('css/tiny-mde.min.js') ?>"></script>
-<script src="<?= asset('css/jquery.js') ?>"></script>
-<script src="<?= asset('css/flowbite.js') ?>"></script>
+<script src="<?= asset('js/tiny-mde.min.js') ?>"></script>
+<script src="<?= asset('js/jquery.js') ?>"></script>
 <script type="text/javascript">
     var tinyMDE = new TinyMDE.Editor({
         textarea: 'txt',
