@@ -7,12 +7,11 @@ use Parsedown;
 
 use App\Models\Artikel_Table;
 
-class Artikel extends Controller
+class Editor extends Controller
 {
-    public static function artikelBoard()
+    public static function workbench()
     {
-        $artikel = PusatData::getArtikelList();
-        return view('artikel',['listArtikel'=>$artikel]);
+        return view('workbench');
     }
     public static function artikelBaru(Request $request)
     {

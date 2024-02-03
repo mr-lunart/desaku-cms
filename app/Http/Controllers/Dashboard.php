@@ -12,12 +12,11 @@ class Dashboard extends Controller
 {
     public static function dashboard()
     {
-        $auth = session()->get('authorization');
-        $id = session()->get('id_admin');
-        $test = new AuthorizationController();
-        $permit = $test->getPermission('showDashboard',$id);
-        print_r($permit);
-        return view('editor');
+        // $auth = session()->get('authorization');
+        // $id = session()->get('id_admin');
+        // $test = new AuthorizationController();
+        // $permit = $test->getPermission('showDashboard',$id);
+        return view('dashboard');
     }
     public static function showdata(Request $request)
     {

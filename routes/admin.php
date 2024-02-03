@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Auth\AuthController;
 
 use App\Http\Controllers\PusatData;
-use App\Http\Controllers\Artikel;
+use App\Http\Controllers\Editor;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\DataRT;
 use App\Http\Controllers\Galeri;
@@ -20,16 +20,17 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard',[Dashboard::class,'dashboard'])->name('dashboard');
+    Route::get('/editor', [Editor::class,'workbench'])->name('editor');
 
     Route::get('/manajer',[ShowManajerPage::class,'manajerAdmin'])->name('manajer');
     Route::get('/manajer/insertadmin',[ShowManajerPage::class,'manajerInsertAdmin'])->name('manajerInsert');
     Route::post('/manajer/createadmin',[ManajerController::class,'createAdmin'])->name('manajerCreate');
     
-    Route::get('/artikel/baru',[Artikel::class,'artikelBaru'])->name('artikelBaru');
+    // Route::get('/artikel/baru',[Artikel::class,'artikelBaru'])->name('artikelBaru');
     Route::get('/pusatdata', [DataRT::class,'dataRT'])->name('pusatdata');
     Route::get('/pusatdata/databaru', [DataRT::class,'databaru'])->name('databaru');
     Route::get('/pusatdata/visi', [DataRT::class,'visiBaru'])->name('visibaru');
-    Route::get('/artikel', [Artikel::class,'artikelBoard'])->name('artikelBoard');
+    
     Route::get('/galeri', [Galeri::class,'galeriPage'])->name('galeri');
     Route::get('/galeri/upload', [Galeri::class,'uploadGaleri'])->name('uploadGaleri');
     Route::get('/pusatdata/database/rt/deleted', [PusatData::class,'deletedRT'])->name('deletedRT');

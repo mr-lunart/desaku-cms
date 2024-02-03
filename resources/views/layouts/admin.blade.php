@@ -16,14 +16,15 @@
 
     @yield('navbar')
 
-    <div class="p-4 sm:ml-64">
+    <div class="sm:ml-64">
         
         @yield('topbar')
 
-        @yield('content')
+        <div class="p-3">
+            @yield('content')
+        </div>
 
     </div>
-
     @yield('footer')
     <script></script>
 </body>
