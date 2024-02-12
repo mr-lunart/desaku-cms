@@ -1,7 +1,10 @@
 @extends('layouts.admin')
 
-@section('tiny-mde')
-<link rel="stylesheet" type="text/css" href="<?= asset('css/tiny-mde.min.css') ?>" />
+@section('title')
+<title>Dashboard</title>
+@endsection
+
+@section('css')
 @endsection
 
 @section('sidebar')
@@ -12,5 +15,9 @@
 @endsection
 
 @section('footer')
-<script src="<?= asset('css/jquery.js') ?>"></script>
+@endsection
+
+@section('script')
+<script src="<?= asset('js/jquery/jquery.js') ?>"></script>
+<script src="<?= asset('js/jquery/jquery-ui.js') ?>"></script>
 @endsection
