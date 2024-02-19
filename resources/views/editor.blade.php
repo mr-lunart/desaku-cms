@@ -33,11 +33,11 @@
         <p>Some initial <strong>bold</strong> text</p>
         <p><br></p>
     </div>
-   
+
 </form>
 
 <div id="wrap-0" class="wrapper">
-    <button id="button-0" class=" bg-green-700 px-4 py-2 text-white rounded-none" onclick="paragraf('button-0')">Publish</button>
+    <button id="button-0" class=" bg-green-700 px-4 py-2 text-white rounded-none" onclick="addSection('button-200')"><b>+</b></button>
 </div>
 
 @endsection
@@ -57,12 +57,80 @@
     });
 </script>
 <script>
-    const sabak = new Sabak();
-    function paragraf(id, sabak) {
-        sabak.createDivEditor()
-        // document.getElementById(id).parentNode.insertBefore(sabak.createDivEditor(),document.getElementById(id))
-        // document.getElementById(id).remove()
-        // document.getElementById(id).parentNode.insertBefore(document.createElement("button"), document.getElementById(id).nextSibling)
+    // if (typeof(Storage) !== "undefined") {
+    //     console.log('supported')
+    //     // Code for localStorage/sessionStorage.
+    // } else {
+    //     console.log('not supported')
+    //     // Sorry! No Web Storage support..
+    // }
+    function setStorage(name, item) {
+        if (localStorage.getItem(name) == null) {
+            localStorage.setItem(name, item);
+            return {
+                name: 'created'
+            }
+        } else {
+            localStorage.setItem(name, item);
+            return {
+                name: 'updated'
+            }
+        }
     }
+
+    function getStorage(name) {
+        if (localStorage.getItem(name) == null) {
+            return null
+        } else {
+            return localStorage.getItem(name);
+        }
+    }
+
+    // if (!(localStorage.getItem('editor') == null)) {
+    //     var retrievedObject = localStorage.getItem('editor');
+    //     var uuid = JSON.parse(retrievedObject)
+    //     uuid.id.push(idElement)
+    //     localStorage.setItem("editor", JSON.stringify(uuid));
+    // } else {
+
+
+    //     var retrievedObject = localStorage.getItem('editor');
+    // }
+    // console.log('retrievedObject: ', JSON.parse(retrievedObject));
+    // localStorage.removeItem('editor')
+
+    function addSection(id) {
+        let storage = getStorage('editor')
+        let uid = id.split('-')[1]
+        if (storage == null) {
+            let item = {
+                uuid: {}
+            }
+            item.uuid[uid] = id
+            setStorageStatus = setStorage('editor', JSON.stringify(item))
+
+        } else {
+            item = JSON.parse(storage)
+            if (!(item.uuid.hasOwnProperty(uid))) {
+                item.uuid[uid] = id
+                setStorageStatus = setStorage('editor', JSON.stringify(item))
+            } else {
+                return console.log(getStorage('editor'))
+                // return console.log('uuid has been existed')
+            }
+        }
+        return console.log(getStorage('editor'))
+
+        // let uuid = JSON.parse(getStorage('editor'))
+        // uuid 
+        // uuid.id.push(idElement)
+
+    }
+    // function paragraf(id, sabak) {
+    //     sabak.createDivEditor()
+    //     // document.getElementById(id).parentNode.insertBefore(sabak.createDivEditor(),document.getElementById(id))
+    //     // document.getElementById(id).remove()
+    //     // document.getElementById(id).parentNode.insertBefore(document.createElement("button"), document.getElementById(id).nextSibling)
+    // }
 </script>
 @endsection
