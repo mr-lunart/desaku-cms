@@ -36,8 +36,8 @@
 
 </form>
 
-<div id="wrap-0" class="wrapper">
-    <button id="button-0" class=" bg-green-700 px-4 py-2 text-white rounded-none" onclick="addSection('button-200')"><b>+</b></button>
+<div id="component-container-0" class="wrapper">
+    <button id="component-4" class=" bg-green-700 px-4 py-2 text-white rounded-none" onclick="test('component-0')"><b>+</b></button>
 </div>
 
 @endsection
@@ -86,45 +86,64 @@
         }
     }
 
-    // if (!(localStorage.getItem('editor') == null)) {
-    //     var retrievedObject = localStorage.getItem('editor');
-    //     var uuid = JSON.parse(retrievedObject)
-    //     uuid.id.push(idElement)
-    //     localStorage.setItem("editor", JSON.stringify(uuid));
-    // } else {
+    function spawnAddComponent(id) {
+        let format = 'component-container-'
+        let Div = document.createElement('div')
+        Div.setAttribute('class', 'wrapper')
+        Div.setAttribute('id', format.concat(id))
+    }
 
+    function newComponent(id) {
+        let container = document.getElementById(id).parentNode;
+    }
 
-    //     var retrievedObject = localStorage.getItem('editor');
-    // }
-    // console.log('retrievedObject: ', JSON.parse(retrievedObject));
-    // localStorage.removeItem('editor')
-
-    function addSection(id) {
-        let storage = getStorage('editor')
-        let uid = id.split('-')[1]
+    function uuidGenerator() {
+        let storage = getStorage('uuid')
         if (storage == null) {
+            return null
+
+        } else {
+            let item = JSON.parse(storage)
+            let gen = Object.keys(item.uuid).pop()
+            return parseInt(gen)
+        }
+
+    }
+
+    function uuidReset() {
+        result = localStorage.removeItem('uuid')
+        return result
+    }
+
+    function uuidStorage(id) {
+        let uid = uuidGenerator()
+        let storage = getStorage('uuid')
+        if (uid == null) {
             let item = {
                 uuid: {}
             }
-            item.uuid[uid] = id
-            setStorageStatus = setStorage('editor', JSON.stringify(item))
+            item.uuid[0] = id + "-" + 0
+                setStorage('uuid', JSON.stringify(item))
 
         } else {
+            uid = uid + 1
             item = JSON.parse(storage)
             if (!(item.uuid.hasOwnProperty(uid))) {
-                item.uuid[uid] = id
-                setStorageStatus = setStorage('editor', JSON.stringify(item))
+                item.uuid[uid] = id + "-" + uid
+                setStorage('uuid', JSON.stringify(item))
             } else {
-                return console.log(getStorage('editor'))
-                // return console.log('uuid has been existed')
+                return JSON.parse(getStorage('uuid'))
             }
         }
-        return console.log(getStorage('editor'))
+        return JSON.parse(getStorage('uuid'))
+    }
 
-        // let uuid = JSON.parse(getStorage('editor'))
-        // uuid 
-        // uuid.id.push(idElement)
-
+    function test(id) {
+        let storage = uuidStorage(id)
+        let lastIndex = Object.keys(storage.uuid).pop()
+        console.log({
+            [lastIndex]: storage.uuid[lastIndex]
+        })
     }
     // function paragraf(id, sabak) {
     //     sabak.createDivEditor()
