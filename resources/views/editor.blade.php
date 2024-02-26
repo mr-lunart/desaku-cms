@@ -28,16 +28,13 @@
     <hr>
     <br>
 
-    <div id="editor-0">
-        <p>Hello World!</p>
-        <p>Some initial <strong>bold</strong> text</p>
-        <p><br></p>
+</form>
+<div id="sabak">
+
+    <div id="component-container-0" class="wrapper">
+        <button id="component-4" class=" bg-green-700 px-4 py-2 text-white rounded-none" onclick="test(this)"><b>+</b></button>
     </div>
 
-</form>
-
-<div id="component-container-0" class="wrapper">
-    <button id="component-4" class=" bg-green-700 px-4 py-2 text-white rounded-none" onclick="test('component-0')"><b>+</b></button>
 </div>
 
 @endsection
@@ -52,9 +49,9 @@
 <script src="<?= asset('js/quill/quill.js') ?>"></script>
 <script src="<?= asset('js/editor/sabak.js') ?>"></script>
 <script type="text/javascript">
-    var quill = new Quill('#editor-0', {
-        theme: 'snow'
-    });
+    // var quill = new Quill('#editor-0', {
+    //     theme: 'snow'
+    // });
 </script>
 <script>
     // if (typeof(Storage) !== "undefined") {
@@ -86,15 +83,19 @@
         }
     }
 
-    function spawnAddComponent(id) {
-        let format = 'component-container-'
-        let Div = document.createElement('div')
-        Div.setAttribute('class', 'wrapper')
-        Div.setAttribute('id', format.concat(id))
-    }
+    function spawnAddComponent(id, classes, elements, attr = null) {
 
-    function newComponent(id) {
-        let container = document.getElementById(id).parentNode;
+        let storage = uuidStorage(id)
+        let lastIndex = Object.keys(storage.uuid).pop()
+
+        let divNode = document.createElement(elements)
+        divNode.setAttribute('class', classes)
+        divNode.setAttribute('id', storage.uuid[lastIndex])
+        if ( !attr == null ) {
+            divNode.setAttribute(attr['name'], attr['value'])
+        }
+
+        return divNode
     }
 
     function uuidGenerator() {
@@ -123,7 +124,7 @@
                 uuid: {}
             }
             item.uuid[0] = id + "-" + 0
-                setStorage('uuid', JSON.stringify(item))
+            setStorage('uuid', JSON.stringify(item))
 
         } else {
             uid = uid + 1
@@ -138,18 +139,27 @@
         return JSON.parse(getStorage('uuid'))
     }
 
-    function test(id) {
-        let storage = uuidStorage(id)
-        let lastIndex = Object.keys(storage.uuid).pop()
-        console.log({
-            [lastIndex]: storage.uuid[lastIndex]
-        })
+    function showFloatingEditorMenu(elementNode) {
+        elementNode.parentNode.insertAdjacentHTML('afterbegin','<p>Hallo</p>')
+        console.log(elementNode.parentNode)
     }
-    // function paragraf(id, sabak) {
-    //     sabak.createDivEditor()
-    //     // document.getElementById(id).parentNode.insertBefore(sabak.createDivEditor(),document.getElementById(id))
-    //     // document.getElementById(id).remove()
-    //     // document.getElementById(id).parentNode.insertBefore(document.createElement("button"), document.getElementById(id).nextSibling)
-    // }
+
+
+    function test(elementNode) {
+        let wrapper = spawnAddComponent("component-wrapper", 'wrapper my-3', "div")
+        let component = spawnAddComponent("component", 'new-component bg-green-700 px-4 py-2 text-white rounded-none', "button")
+        component.innerText=component.id;
+        component.setAttribute('onclick','test(this)')
+        wrapper.appendChild(component)
+        document.getElementById('sabak').insertBefore(wrapper, elementNode.parentNode)
+        let wrapper2 = spawnAddComponent("component-wrapper", 'wrapper my-3', "div")
+        let component2 = spawnAddComponent("component", 'new-component bg-green-700 px-4 py-2 text-white rounded-none', "button")
+        component2.innerText=component2.id;
+        component2.setAttribute('onclick','test(this)')
+        wrapper2.appendChild(component2)
+        document.getElementById('sabak').insertBefore(wrapper2, elementNode.parentNode.nextSibling)
+        // elementNode.remove()
+    }
+
 </script>
 @endsection
