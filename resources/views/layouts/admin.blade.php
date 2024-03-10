@@ -12,14 +12,14 @@
 
 <body class="font-sans">
     @yield('sidebar')
-    <div class="sm:ml-64">
+    <div style="display: inline-block;" class="relative">
         @yield('topbar')
-        <div class="p-3">
+        <div class="p-3 absolute">
             @yield('content')
         </div>
     </div>
-    @yield('footer')
-    @yield('script')
+    <!-- @yield('footer') -->
+    <!-- @yield('script') -->
 </body>
 
 </html>

@@ -18,6 +18,7 @@
 @endsection
 
 @section('content')
+<div class="" style="position:absolute; top:0; left:0; background-color: yellow; width: 100vw; height: 100vh;"></div>
 <form action="#" method="POST" onsubmit="updateTextContainer()">
     @csrf
     <div>
