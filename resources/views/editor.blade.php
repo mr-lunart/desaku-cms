@@ -18,7 +18,7 @@
 @endsection
 
 @section('content')
-<div class="" style="position:absolute; top:0; left:0; background-color: yellow; width: 100vw; height: 100vh;"></div>
+<!-- <div class="" style="position:absolute; top:0; left:0; background-color: yellow; width: 100vw; height: 100vh;"></div> -->
 <form action="#" method="POST" onsubmit="updateTextContainer()">
     @csrf
     <div>
@@ -33,7 +33,7 @@
 <div id="sabak">
 
     <div id="component-container-0" class="wrapper">
-        <button id="component-4" class=" bg-green-700 px-4 py-2 text-white rounded-none" onclick="test(this)"><b>+</b></button>
+        <button id="component-4" class=" bg-green-700 px-4 py-2 text-white rounded-none" onclick=" test(this) "><b>+</b></button>
     </div>
 
 </div>
@@ -49,7 +49,7 @@
 <script src="<?= asset('js/jquery/jquery-ui.js') ?>"></script>
 <script src="<?= asset('js/quill/quill.js') ?>"></script>
 <script src="<?= asset('js/editor/sabak.js') ?>"></script>
-<script type="text/javascript">
+<script>
     // var quill = new Quill('#editor-0', {
     //     theme: 'snow'
     // });

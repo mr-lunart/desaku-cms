@@ -11,15 +11,17 @@
 </head>
 
 <body class="font-sans">
-    @yield('sidebar')
-    <div style="display: inline-block;" class="relative">
-        @yield('topbar')
-        <div class="p-3 absolute">
-            @yield('content')
+    <div class="relative flex flex-row">
+        @yield('sidebar')
+        <div class="flex-1 overflow-y-auto">
+            @yield('topbar')
+            <div class="p-3 relative">
+                @yield('content')
+            </div>
         </div>
+        <!-- @yield('footer') -->
+        <!-- @yield('script') -->
     </div>
-    <!-- @yield('footer') -->
-    <!-- @yield('script') -->
 </body>
 
 </html>
