@@ -30,17 +30,13 @@
     <br>
 
 </form>
-<div id="sabak">
+<div id="sabak" class="h-screen overflow-y-scroll">
 
     <div id="component-container-0" class="wrapper">
-        <button id="component-4" class=" bg-green-700 px-4 py-2 text-white rounded-none" onclick=" test(this) "><b>+</b></button>
+        <button id="component-4" class=""><i class="fa-regular fa-square-plus text-2xl text-teal-400"></i></button>
     </div>
 
 </div>
-
-@endsection
-
-@section('footer')
 
 @endsection
 
@@ -54,6 +50,7 @@
     //     theme: 'snow'
     // });
 </script>
+
 <script>
     // if (typeof(Storage) !== "undefined") {
     //     console.log('supported')
@@ -146,21 +143,24 @@
     }
 
 
-    function test(elementNode) {
+    function Test() {
+        elementNode = this
         let wrapper = spawnAddComponent("component-wrapper", 'wrapper my-3', "div")
-        let component = spawnAddComponent("component", 'new-component bg-green-700 px-4 py-2 text-white rounded-none', "button")
+        let component = spawnAddComponent("component", 'new-componentpx-4 py-2 rounded-none', "button")
         component.innerText=component.id;
-        component.setAttribute('onclick','test(this)')
+        component.addEventListener('click',Test, false)
         wrapper.appendChild(component)
         document.getElementById('sabak').insertBefore(wrapper, elementNode.parentNode)
         let wrapper2 = spawnAddComponent("component-wrapper", 'wrapper my-3', "div")
-        let component2 = spawnAddComponent("component", 'new-component bg-green-700 px-4 py-2 text-white rounded-none', "button")
+        let component2 = spawnAddComponent("component", 'new-component px-4 py-2 rounded-none', "button")
         component2.innerText=component2.id;
-        component2.setAttribute('onclick','test(this)')
+        component2.addEventListener('click',Test, false)
         wrapper2.appendChild(component2)
         document.getElementById('sabak').insertBefore(wrapper2, elementNode.parentNode.nextSibling)
-        // elementNode.remove()
+        elementNode.style.backgroundColor = "red";  
+        elementNode.remove()
     }
 
+    document.getElementById('component-4').addEventListener('click',Test, false)
 </script>
 @endsection
