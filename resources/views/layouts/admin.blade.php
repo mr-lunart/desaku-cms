@@ -14,11 +14,11 @@
 <body class="font-sans">
     <div class="relative flex flex-row h-screen" style="overflow-y: hidden;">
         @yield('sidebar')
-        <div class="flex-1">
+        <div class="w-full">
             <div class="relative">
                 @yield('topbar')
             </div>
-            <div class="relative" style="overflow-y: scroll;">
+            <div class="relative" style="height:85vh; overflow-y: scroll;">
                 @yield('content')
             </div>
         </div>
